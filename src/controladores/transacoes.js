@@ -8,7 +8,7 @@ const listarDoUsuario = async (req, res) => {
     try {
 
         const query = `
-            select t.id, t.tipo, t.descricao, t.valor, t.data, t.usuario_id, t.categoria_id, c.nome as categoria_nome from transacoes as t
+            select t.id, t.tipo, t.descricao, t.valor, t.data, t.usuario_id, t.categoria_id, c.descricao as categoria_descricao from transacoes as t
             join categorias as c on t.categoria_id = c.id 
             where t.usuario_id = $1
         `;
@@ -53,7 +53,7 @@ const detalhar = async (req, res) => {
     try {
 
         const query = `
-            select t.id, t.tipo, t.descricao, t.valor, t.data, t.usuario_id, t.categoria_id, c.nome from transacoes as t
+            select t.id, t.tipo, t.descricao, t.valor, t.data, t.usuario_id, t.categoria_id, c.descricao as categoria_nome from transacoes as t
             join categorias as c on t.categoria_id = c.id 
             where t.id = $1;
         `;

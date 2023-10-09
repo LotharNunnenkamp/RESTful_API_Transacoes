@@ -20,16 +20,16 @@ rotas.use(verificarUsuarioLogado);
 rotas.get('/usuario', detalharUsuario);
 rotas.put('/usuario', atualizarUsuario);
 
-rotas.get('/categorias', categorias.listar);
+rotas.get('/categoria', categorias.listar);
 
-rotas.get('/transacoes', transacoes.listarDoUsuario);
-rotas.get('/transacoes/extrato', transacoes.exibirExtrato);
-rotas.get('/transacoes/:id', transacoes.detalhar);
+rotas.get('/transacao', transacoes.listarDoUsuario);
+rotas.get('/transacao/extrato', transacoes.exibirExtrato);
+rotas.get('/transacao/:id', transacoes.detalhar);
 
-rotas.post('/transacoes', transacoes.cadastrar);
+rotas.post('/transacao', transacoes.cadastrar);
 
-rotas.put('/transacoes/:id', transacoes.atualizar);
+rotas.put('/transacao/:id', transacoes.atualizar);
 
-rotas.delete('/transacoes/:id', transacoes.deletar);
+rotas.delete('/transacao/:id', transacoes.deletar);
 
 module.exports = rotas;
