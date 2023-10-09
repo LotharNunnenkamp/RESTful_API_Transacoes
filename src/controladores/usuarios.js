@@ -92,7 +92,65 @@ const fazerLogin = async (req, res) => {
     }
 }
 
+const detalharUsuario = async (req, res) => {
+    const {id} = req.usuario;
+
+    try {
+        const {rows, rowCount} = await pool.query(
+            'select * from usuarios where id = $1', [id]
+        )
+
+        if (rowCount < 1) {
+            return res.status(400).json({mensagem: "Para acessar este recurso um token de autenticação válido deve ser enviado."})
+        }        
+        const resultado = {
+            id,
+            nome: rows[0].nome,
+            email: rows[0].email
+        }
+        return res.json(resultado)
+        
+    } catch (error) {
+        return res.status(401).json({mensagem: "Não autorizado."})
+    }
+}
+
+const atualizarUsuario = async (req, res) => {
+    const {id} = req.usuario;
+
+    const {nome, email, senha} = req.body;    
+
+    try {
+
+        if (!nome || !email || !senha) {
+            return res.status(400).json({mensagem: "Todos os campos são obrigatórios."})
+        }
+
+        const {rows, rowCount} = await pool.query(
+            'select * from usuarios where email = $1',
+            [email]
+        )
+
+        if (rowCount > 1) {
+            return res.status(400).json({mensagem: "O email informado já está sendo usado por outro usuário."})
+        }
+
+        const senhaCriptografada = await bcrypt.hash(senha, 10)
+
+        await pool.query(
+            'update usuarios set nome = $1, email = $2, senha = $3 where id = $4', [nome, email, senhaCriptografada, id]
+        )
+
+        return res.status(204).send()        
+        
+    } catch (error) {
+        return res.status(401).json({mensagem: "Não autorizado."})
+    }
+}
+
 module.exports = {
     cadastrarUsuario,
-    fazerLogin
+    fazerLogin,
+    detalharUsuario,
+    atualizarUsuario
 }
