@@ -14,11 +14,11 @@ const verificarUsuarioLogado = async (req, res, next) => {
 
         const token = authorization.split(' ')[1]
 
-        const {usuario} = await jwt.verify(token, process.env.CHAVE_JWT)
+        const {usuarioVerificado} = await jwt.verify(token, process.env.CHAVE_JWT)
         
         const {rows, rowCount} = await pool.query(
             'select * from usuarios where id = $1',
-            [usuario]
+            [usuarioVerificado]
         )
         
         if (rowCount < 1) {
@@ -27,8 +27,9 @@ const verificarUsuarioLogado = async (req, res, next) => {
             })
         }   
 
-      const {senha, ...usuario} = rows[0];
-       req.usuario = usuario;
+        const {senha, ...usuario} = rows[0];
+        
+        req.usuario = usuario;
 
         next()
 

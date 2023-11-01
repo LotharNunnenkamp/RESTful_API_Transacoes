@@ -96,13 +96,10 @@ const detalharUsuario = async (req, res) => {
     const {id} = req.usuario;
 
     try {
-        const {rows, rowCount} = await pool.query(
+        const {rows} = await pool.query(
             'select * from usuarios where id = $1', [id]
         )
-
-        if (rowCount < 1) {
-            return res.status(400).json({mensagem: "Para acessar este recurso um token de autenticação válido deve ser enviado."})
-        }        
+  
         const resultado = {
             id,
             nome: rows[0].nome,
