@@ -27,7 +27,8 @@ const verificarUsuarioLogado = async (req, res, next) => {
             })
         }   
 
-        req.usuario = rows[0]
+      const {senha, ...usuario} = rows[0];
+       req.usuario = usuario;
 
         next()
 
