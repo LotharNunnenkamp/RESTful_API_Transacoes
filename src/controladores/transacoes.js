@@ -87,7 +87,7 @@ const cadastrar = async (req, res) => {
         return res.status(400).json({ mensagem: 'Todos os campos obrigatórios devem ser informados.' });
     }
 
-    if (tipo !== 'entrada' && tipo !== 'saida') {
+    if (tipo.toLowerCase() !== 'entrada' && tipo.toLowerCase() !== 'saida') {
 
         return res.status(400).json({ mensagem: 'Tipo inválido, informe se é uma entrada ou uma saida.' });
     }
