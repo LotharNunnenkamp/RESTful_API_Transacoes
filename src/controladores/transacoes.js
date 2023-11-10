@@ -38,10 +38,9 @@ const listarDoUsuario = async (req, res) => {
 
         return res.status(200).json(transacoesDoUsuario.rows);
     } catch (error) {
-
-        console.log(error);
-
-        return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
+        return res.status(500).json({
+            mensagem: "Erro interno do servidor"
+        })
     }
 }
 
@@ -72,8 +71,9 @@ const detalhar = async (req, res) => {
 
         return res.status(200).json(transacao.rows[0]);
     } catch (error) {
-
-        return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
+        return res.status(500).json({
+            mensagem: "Erro interno do servidor"
+        })
     }
 }
 
@@ -112,13 +112,13 @@ const cadastrar = async (req, res) => {
 
         return res.status(201).json(transacaoCadastrada.rows[0]);
     } catch (error) {
-
-        return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
+        return res.status(500).json({
+            mensagem: "Erro interno do servidor"
+        })
     }
 }
 
 const atualizar = async (req, res) => {
-
 
     const { descricao, valor, data, categoria_id, tipo } = req.body;
     const { id: idTransacao } = req.params;
@@ -171,8 +171,9 @@ const atualizar = async (req, res) => {
 
         return res.status(201).json();
     } catch (error) {
-
-        return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
+        return res.status(500).json({
+            mensagem: "Erro interno do servidor"
+        })
     }
 }
 
@@ -199,8 +200,9 @@ const deletar = async (req, res) => {
 
         return res.status(200).json();
     } catch (error) {
-
-        return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
+        return res.status(500).json({
+            mensagem: "Erro interno do servidor"
+        })
     }
 }
 
@@ -225,12 +227,11 @@ const exibirExtrato = async (req, res) => {
 
         return res.status(200).json(extrato);
     } catch (error) {
-        
-        return res.status(500).json({ mensagem: 'Erro interno do servidor.' });
+        return res.status(500).json({
+            mensagem: "Erro interno do servidor"
+        })
     }
 }
-
-
 
 module.exports = {
     listarDoUsuario,

@@ -36,7 +36,7 @@ const cadastrarUsuario = async (req, res) => {
         })
 
     } catch (error) {
-        return res.status(400).json({
+        return res.status(500).json({
             mensagem: error.message
         })
     }
@@ -86,8 +86,8 @@ const fazerLogin = async (req, res) => {
         })
 
     } catch (error) {
-        return res.status(400).json({
-            mensagem: error.message
+        return res.status(500).json({
+            mensagem: "Erro interno do servidor"
         })
     }
 }
@@ -108,7 +108,9 @@ const detalharUsuario = async (req, res) => {
         return res.json(resultado)
         
     } catch (error) {
-        return res.status(401).json({mensagem: "Não autorizado."})
+        return res.status(401).json({
+            mensagem: "Não autorizado."
+        })
     }
 }
 
@@ -123,7 +125,7 @@ const atualizarUsuario = async (req, res) => {
             return res.status(400).json({mensagem: "Todos os campos são obrigatórios."})
         }
 
-        const {rows, rowCount} = await pool.query(
+        const {rowCount} = await pool.query(
             'select * from usuarios where email = $1',
             [email]
         )
@@ -141,7 +143,9 @@ const atualizarUsuario = async (req, res) => {
         return res.status(204).send()        
         
     } catch (error) {
-        return res.status(401).json({mensagem: "Não autorizado."})
+        return res.status(401).json({
+            mensagem: "Não autorizado."
+        })
     }
 }
 

@@ -1,4 +1,4 @@
-create database dindin;
+create database transacoes_financeiras;
 
 create table usuarios (
     id serial primary key,
